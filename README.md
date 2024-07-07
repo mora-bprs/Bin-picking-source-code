@@ -458,3 +458,7 @@ int main(void) {
 	return 0;
 }
 ```
+
+### References
+- Microchip Studio
+- u8g2 Library
