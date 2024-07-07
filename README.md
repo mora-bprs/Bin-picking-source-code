@@ -64,7 +64,88 @@ int main(void) {
     u8g2_DrawStr(&u8g2, 0, 0, "OLED Test");
     u8g2_SendBuffer(&u8g2);
 
+
     while (1) {
         // Loop forever
     }
 }
+```
+
+### Stepper Motor Test Code
+
+The following code initializes the stepper motor and makes it perform a test movement:
+
+```c
+#include <avr/io.h>
+#include <util/delay.h>
+
+#define STEP_PIN PD2
+#define DIR_PIN PD4
+
+void setup_stepper_motor() {
+    DDRD |= (1 << STEP_PIN) | (1 << DIR_PIN);
+}
+
+void stepper_motor_test() {
+    PORTD |= (1 << DIR_PIN); // Set direction
+    for (int i = 0; i < 200; i++) {
+        PORTD |= (1 << STEP_PIN);
+        _delay_us(1000);
+        PORTD &= ~(1 << STEP_PIN);
+        _delay_us(1000);
+    }
+}
+
+int main(void) {
+    setup_stepper_motor();
+    while (1) {
+        stepper_motor_test();
+        _delay_ms(1000);
+    }
+}
+```
+### Gripper Test Code
+
+The following code initializes the gripper mechanism and performs a test open and close cycle:
+
+```c
+#include <avr/io.h>
+#include <util/delay.h>
+
+#define STEP_PIN PD2
+#define DIR_PIN PD4
+
+void gripper_setup() {
+    DDRD |= (1 << STEP_PIN) | (1 << DIR_PIN);
+}
+
+void gripper_open() {
+    PORTD |= (1 << DIR_PIN); // Set direction to open
+    for (int i = 0; i < 200; i++) {
+        PORTD |= (1 << STEP_PIN);
+        _delay_us(1000);
+        PORTD &= ~(1 << STEP_PIN);
+        _delay_us(1000);
+    }
+}
+
+void gripper_close() {
+    PORTD &= ~(1 << DIR_PIN); // Set direction to close
+    for (int i = 0; i < 200; i++) {
+        PORTD |= (1 << STEP_PIN);
+        _delay_us(1000);
+        PORTD &= ~(1 << STEP_PIN);
+        _delay_us(1000);
+    }
+}
+
+int main(void) {
+    gripper_setup();
+    while (1) {
+        gripper_open();
+        _delay_ms(1000);
+        gripper_close();
+        _delay_ms(1000);
+    }
+}
+```
