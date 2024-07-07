@@ -27,11 +27,13 @@ The bin-picking robot is designed to pick and place objects based on received co
 - UART Interface
 - Button
 - Membrane Sensor
+- DRV8825 Motor driver
 
 ## Wiring
 
 - **OLED Display**: Connect the OLED display's SDA and SCL pins to the ATmega328P's corresponding I2C pins.
 - **Stepper Motor**: Connect the stepper motor's control pins (STEP_PIN and DIR_PIN) to PD2 and PD4 of the ATmega328P.
+- **Motor Driver**:
 - **Button**: Connect the button to PD3 with a pull-up resistor.
 - **Membrane Sensor**: Connect the membrane sensor to the ADC input channel PC0 of the ATmega328P.
 
@@ -146,6 +148,62 @@ int main(void) {
         _delay_ms(1000);
         gripper_close();
         _delay_ms(1000);
+    }
+}
+```
+### Receiving Coordinates
+
+The following code initializes the UART interface and receives coordinates via UART:
+
+```c
+#include <avr/io.h>
+#include <util/delay.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define BAUD 9600
+#define MYUBRR F_CPU/16/BAUD-1
+
+void UART_init(unsigned int ubrr) {
+    UBRR0H = (unsigned char)(ubrr >> 8);
+    UBRR0L = (unsigned char)ubrr;
+    UCSR0B = (1 << RXEN0);
+    UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
+}
+
+unsigned char UART_receive(void) {
+    while (!(UCSR0A & (1 << RXC0)));
+    return UDR0;
+}
+
+void RX_coordinates(char *buffer, float *x_coordinate, float *y_coordinate) {
+    int i = 0;
+    while (1) {
+        buffer[i] = UART_receive();
+        if (buffer[i] == '\n') {
+            buffer[i] = '\0';
+            break;
+        }
+        i++;
+    }
+    char *token = strtok(buffer, ", ");
+    if (token != NULL) {
+        *x_coordinate = atof(token);
+        token = strtok(NULL, ", ");
+        if (token != NULL) {
+            *y_coordinate = atof(token);
+        }
+    }
+}
+
+int main(void) {
+    char buffer[20];
+    float x_coordinate = 0.0, y_coordinate = 0.0;
+    
+    UART_init(MYUBRR);
+    
+    while (1) {
+        RX_coordinates(buffer, &x_coordinate, &y_coordinate);
     }
 }
 ```
