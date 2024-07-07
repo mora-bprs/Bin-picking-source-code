@@ -459,6 +459,6 @@ int main(void) {
 }
 ```
 
-### References
-- Microchip Studio
-- u8g2 Library
+## References
+- [Microchip Studio](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio)
+- [u8g2 Library](https://github.com/olikraus/u8g2)
