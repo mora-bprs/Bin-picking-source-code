@@ -24,7 +24,7 @@
 volatile char RxData[10];  // Buffer to store received data
 volatile uint8_t indx = 0;  // Index to track position in buffer
 
-int steps_to_move = 500;
+int steps_to_move = 2000;
 
 void gripper_setup();
 void gripper_opening();
