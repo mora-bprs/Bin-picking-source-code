@@ -13,11 +13,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   4 .debug_aranges 00000038  00000000  00000000  000001f0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000007cb  00000000  00000000  00000228  2**0
+  5 .debug_info   000007ca  00000000  00000000  00000228  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000709  00000000  00000000  000009f3  2**0
+  6 .debug_abbrev 00000709  00000000  00000000  000009f2  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000002c2  00000000  00000000  000010fc  2**0
+  7 .debug_line   000002c2  00000000  00000000  000010fb  2**0
                   CONTENTS, READONLY, DEBUGGING
   8 .debug_frame  00000060  00000000  00000000  000013c0  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -161,7 +161,7 @@ int main(void)
 {
 	// Initialize USART with the calculated UBRR value
 	USART_Init(MYUBRR);
-  d4:	87 e6       	ldi	r24, 0x67	; 103
+  d4:	83 e0       	ldi	r24, 0x03	; 3
   d6:	90 e0       	ldi	r25, 0x00	; 0
   d8:	0e 94 4b 00 	call	0x96	; 0x96 <USART_Init>
 
@@ -180,8 +180,8 @@ int main(void)
 
 	__builtin_avr_delay_cycles(__ticks_dc);
   e4:	2f ef       	ldi	r18, 0xFF	; 255
-  e6:	83 ed       	ldi	r24, 0xD3	; 211
-  e8:	90 e3       	ldi	r25, 0x30	; 48
+  e6:	80 e7       	ldi	r24, 0x70	; 112
+  e8:	92 e0       	ldi	r25, 0x02	; 2
   ea:	21 50       	subi	r18, 0x01	; 1
   ec:	80 40       	sbci	r24, 0x00	; 0
   ee:	90 40       	sbci	r25, 0x00	; 0

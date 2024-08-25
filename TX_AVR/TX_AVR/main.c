@@ -10,7 +10,7 @@
 #include <util/delay.h>  // Include delay functions
 
 
-#define BAUD 9600
+#define BAUD 115200
 #define MYUBRR F_CPU/16/BAUD-1
 
 void USART_Init(unsigned int ubrr);
@@ -29,7 +29,7 @@ int main(void)
 		USART_Transmit_String("Hello, USART!");
 
 		// Delay for 1000 ms
-		_delay_ms(1000);
+		_delay_ms(100);
 	}
 }
 
