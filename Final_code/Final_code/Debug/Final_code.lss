@@ -1,0 +1,517 @@
+
+Final_code.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000028  00800100  0000029e  00000332  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000029e  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          0000000c  00800128  00800128  0000035a  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000035a  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000038c  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000060  00000000  00000000  000003cc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000b51  00000000  00000000  0000042c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000007c4  00000000  00000000  00000f7d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000499  00000000  00000000  00001741  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000000e0  00000000  00000000  00001bdc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000466  00000000  00000000  00001cbc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000037a  00000000  00000000  00002122  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000050  00000000  00000000  0000249c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 d2 00 	jmp	0x1a4	; 0x1a4 <__vector_18>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	ee e9       	ldi	r30, 0x9E	; 158
+  7c:	f2 e0       	ldi	r31, 0x02	; 2
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	a8 32       	cpi	r26, 0x28	; 40
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	a8 e2       	ldi	r26, 0x28	; 40
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	a4 33       	cpi	r26, 0x34	; 52
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 fc 00 	call	0x1f8	; 0x1f8 <main>
+  9e:	0c 94 4d 01 	jmp	0x29a	; 0x29a <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <gripper_setup>:
+void USART_Transmit(unsigned char data);
+void USART_Transmit_String(const char *str);
+
+void gripper_setup() {
+	// Set STEP_PIN and DIR_PIN as output
+	DDRD |= (1 << STEP_PIN) | (1 << DIR_PIN);
+  a6:	8a b1       	in	r24, 0x0a	; 10
+  a8:	84 61       	ori	r24, 0x14	; 20
+  aa:	8a b9       	out	0x0a, r24	; 10
+  ac:	08 95       	ret
+
+000000ae <uartInit>:
+	USART_Transmit_String("Gripper Closed\r\n");
+}
+
+void uartInit(void) {
+	uint16_t ubrr_value = MYUBRR;
+	UBRR0H = (ubrr_value >> 8);
+  ae:	10 92 c5 00 	sts	0x00C5, r1	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7f80c5>
+	UBRR0L = ubrr_value;
+  b2:	83 e0       	ldi	r24, 0x03	; 3
+  b4:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7f80c4>
+	
+	UCSR0B = (1<<RXEN0) | (1<<TXEN0) | (1<<RXCIE0);  // Enable RX, TX, and RX interrupt
+  b8:	88 e9       	ldi	r24, 0x98	; 152
+  ba:	80 93 c1 00 	sts	0x00C1, r24	; 0x8000c1 <__TEXT_REGION_LENGTH__+0x7f80c1>
+	UCSR0C = (1<<UCSZ01) | (1<<UCSZ00);  // 8 data bits, 2 stop bit, no parity
+  be:	86 e0       	ldi	r24, 0x06	; 6
+  c0:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__TEXT_REGION_LENGTH__+0x7f80c2>
+	
+	DDRD |= (1<<PD1);  // PD1 (TXD) as output
+  c4:	8a b1       	in	r24, 0x0a	; 10
+  c6:	82 60       	ori	r24, 0x02	; 2
+  c8:	8a b9       	out	0x0a, r24	; 10
+	DDRD &= ~(1<<PD0);  // PD0 (RXD) as input
+  ca:	8a b1       	in	r24, 0x0a	; 10
+  cc:	8e 7f       	andi	r24, 0xFE	; 254
+  ce:	8a b9       	out	0x0a, r24	; 10
+  d0:	08 95       	ret
+
+000000d2 <btn_state>:
+}
+
+void btn_state() {
+	while(1){
+		if ((PIND & (1 << BUTTON_PIN)) != 0) { // Button pressed (PD3 reads as 0)
+  d2:	4b 9b       	sbis	0x09, 3	; 9
+  d4:	fe cf       	rjmp	.-4      	; 0xd2 <btn_state>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  d6:	2f ef       	ldi	r18, 0xFF	; 255
+  d8:	80 e7       	ldi	r24, 0x70	; 112
+  da:	92 e0       	ldi	r25, 0x02	; 2
+  dc:	21 50       	subi	r18, 0x01	; 1
+  de:	80 40       	sbci	r24, 0x00	; 0
+  e0:	90 40       	sbci	r25, 0x00	; 0
+  e2:	e1 f7       	brne	.-8      	; 0xdc <btn_state+0xa>
+  e4:	00 c0       	rjmp	.+0      	; 0xe6 <btn_state+0x14>
+  e6:	00 00       	nop
+			_delay_ms(DEBOUNCE_DELAY);
+			buttonPressed++;
+  e8:	80 91 28 01 	lds	r24, 0x0128	; 0x800128 <__data_end>
+  ec:	8f 5f       	subi	r24, 0xFF	; 255
+  ee:	80 93 28 01 	sts	0x0128, r24	; 0x800128 <__data_end>
+  f2:	08 95       	ret
+
+000000f4 <USART_Transmit>:
+}
+
+void USART_Transmit(unsigned char data)
+{
+	/* Wait for empty transmit buffer */
+	while (!(UCSR0A & (1 << UDRE0)));
+  f4:	90 91 c0 00 	lds	r25, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7f80c0>
+  f8:	95 ff       	sbrs	r25, 5
+  fa:	fc cf       	rjmp	.-8      	; 0xf4 <USART_Transmit>
+
+	/* Put data into buffer, sends the data */
+	UDR0 = data;
+  fc:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
+ 100:	08 95       	ret
+
+00000102 <USART_Transmit_String>:
+}
+
+void USART_Transmit_String(const char *str)
+{
+ 102:	cf 93       	push	r28
+ 104:	df 93       	push	r29
+ 106:	ec 01       	movw	r28, r24
+	while (*str)
+ 108:	03 c0       	rjmp	.+6      	; 0x110 <USART_Transmit_String+0xe>
+	{
+		USART_Transmit(*str++);
+ 10a:	21 96       	adiw	r28, 0x01	; 1
+ 10c:	0e 94 7a 00 	call	0xf4	; 0xf4 <USART_Transmit>
+	UDR0 = data;
+}
+
+void USART_Transmit_String(const char *str)
+{
+	while (*str)
+ 110:	88 81       	ld	r24, Y
+ 112:	81 11       	cpse	r24, r1
+ 114:	fa cf       	rjmp	.-12     	; 0x10a <USART_Transmit_String+0x8>
+	{
+		USART_Transmit(*str++);
+	}
+}
+ 116:	df 91       	pop	r29
+ 118:	cf 91       	pop	r28
+ 11a:	08 95       	ret
+
+0000011c <gripper_opening>:
+	DDRD |= (1 << STEP_PIN) | (1 << DIR_PIN);
+}
+
+void gripper_opening() {
+	// Set direction to HIGH
+	PORTD |= (1 << DIR_PIN);
+ 11c:	8b b1       	in	r24, 0x0b	; 11
+ 11e:	80 61       	ori	r24, 0x10	; 16
+ 120:	8b b9       	out	0x0b, r24	; 11
+	
+	// Make 500 pulses (half cycle rotation)
+	for (int x = 0; x < steps_to_move; x++) {
+ 122:	20 e0       	ldi	r18, 0x00	; 0
+ 124:	30 e0       	ldi	r19, 0x00	; 0
+ 126:	10 c0       	rjmp	.+32     	; 0x148 <gripper_opening+0x2c>
+		PORTD |= (1 << STEP_PIN);  // Set STEP_PIN HIGH
+ 128:	8b b1       	in	r24, 0x0b	; 11
+ 12a:	84 60       	ori	r24, 0x04	; 4
+ 12c:	8b b9       	out	0x0b, r24	; 11
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 12e:	85 e8       	ldi	r24, 0x85	; 133
+ 130:	8a 95       	dec	r24
+ 132:	f1 f7       	brne	.-4      	; 0x130 <gripper_opening+0x14>
+ 134:	00 00       	nop
+		_delay_us(50);           // Wait 220 microseconds
+		PORTD &= ~(1 << STEP_PIN); // Set STEP_PIN LOW
+ 136:	8b b1       	in	r24, 0x0b	; 11
+ 138:	8b 7f       	andi	r24, 0xFB	; 251
+ 13a:	8b b9       	out	0x0b, r24	; 11
+ 13c:	85 e8       	ldi	r24, 0x85	; 133
+ 13e:	8a 95       	dec	r24
+ 140:	f1 f7       	brne	.-4      	; 0x13e <gripper_opening+0x22>
+ 142:	00 00       	nop
+void gripper_opening() {
+	// Set direction to HIGH
+	PORTD |= (1 << DIR_PIN);
+	
+	// Make 500 pulses (half cycle rotation)
+	for (int x = 0; x < steps_to_move; x++) {
+ 144:	2f 5f       	subi	r18, 0xFF	; 255
+ 146:	3f 4f       	sbci	r19, 0xFF	; 255
+ 148:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 14c:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 150:	28 17       	cp	r18, r24
+ 152:	39 07       	cpc	r19, r25
+ 154:	4c f3       	brlt	.-46     	; 0x128 <gripper_opening+0xc>
+		PORTD &= ~(1 << STEP_PIN); // Set STEP_PIN LOW
+		_delay_us(50);           // Wait 220 microseconds
+	}
+
+	// Transmit "Gripper Opened" after opening
+	USART_Transmit_String("Gripper Opened\r\n");
+ 156:	82 e0       	ldi	r24, 0x02	; 2
+ 158:	91 e0       	ldi	r25, 0x01	; 1
+ 15a:	0e 94 81 00 	call	0x102	; 0x102 <USART_Transmit_String>
+ 15e:	08 95       	ret
+
+00000160 <gripper_closing>:
+}
+
+void gripper_closing() {
+	// Set direction to LOW
+	PORTD &= ~(1 << DIR_PIN);
+ 160:	8b b1       	in	r24, 0x0b	; 11
+ 162:	8f 7e       	andi	r24, 0xEF	; 239
+ 164:	8b b9       	out	0x0b, r24	; 11
+	
+	// Make 500 pulses (half cycle rotation)
+	for (int x = 0; x < steps_to_move; x++) {
+ 166:	20 e0       	ldi	r18, 0x00	; 0
+ 168:	30 e0       	ldi	r19, 0x00	; 0
+ 16a:	10 c0       	rjmp	.+32     	; 0x18c <gripper_closing+0x2c>
+		PORTD |= (1 << STEP_PIN);  // Set STEP_PIN HIGH
+ 16c:	8b b1       	in	r24, 0x0b	; 11
+ 16e:	84 60       	ori	r24, 0x04	; 4
+ 170:	8b b9       	out	0x0b, r24	; 11
+ 172:	85 e8       	ldi	r24, 0x85	; 133
+ 174:	8a 95       	dec	r24
+ 176:	f1 f7       	brne	.-4      	; 0x174 <gripper_closing+0x14>
+ 178:	00 00       	nop
+		_delay_us(50);           // Wait 220 microseconds
+		PORTD &= ~(1 << STEP_PIN); // Set STEP_PIN LOW
+ 17a:	8b b1       	in	r24, 0x0b	; 11
+ 17c:	8b 7f       	andi	r24, 0xFB	; 251
+ 17e:	8b b9       	out	0x0b, r24	; 11
+ 180:	85 e8       	ldi	r24, 0x85	; 133
+ 182:	8a 95       	dec	r24
+ 184:	f1 f7       	brne	.-4      	; 0x182 <gripper_closing+0x22>
+ 186:	00 00       	nop
+void gripper_closing() {
+	// Set direction to LOW
+	PORTD &= ~(1 << DIR_PIN);
+	
+	// Make 500 pulses (half cycle rotation)
+	for (int x = 0; x < steps_to_move; x++) {
+ 188:	2f 5f       	subi	r18, 0xFF	; 255
+ 18a:	3f 4f       	sbci	r19, 0xFF	; 255
+ 18c:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 190:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 194:	28 17       	cp	r18, r24
+ 196:	39 07       	cpc	r19, r25
+ 198:	4c f3       	brlt	.-46     	; 0x16c <gripper_closing+0xc>
+		PORTD &= ~(1 << STEP_PIN); // Set STEP_PIN LOW
+		_delay_us(50);           // Wait 220 microseconds
+	}
+
+	// Transmit "Gripper Closed" after closing
+	USART_Transmit_String("Gripper Closed\r\n");
+ 19a:	83 e1       	ldi	r24, 0x13	; 19
+ 19c:	91 e0       	ldi	r25, 0x01	; 1
+ 19e:	0e 94 81 00 	call	0x102	; 0x102 <USART_Transmit_String>
+ 1a2:	08 95       	ret
+
+000001a4 <__vector_18>:
+	{
+		USART_Transmit(*str++);
+	}
+}
+
+ISR(USART_RX_vect) {
+ 1a4:	1f 92       	push	r1
+ 1a6:	0f 92       	push	r0
+ 1a8:	0f b6       	in	r0, 0x3f	; 63
+ 1aa:	0f 92       	push	r0
+ 1ac:	11 24       	eor	r1, r1
+ 1ae:	8f 93       	push	r24
+ 1b0:	9f 93       	push	r25
+ 1b2:	ef 93       	push	r30
+ 1b4:	ff 93       	push	r31
+	char receivedChar = UDR0;  // Read the received character
+ 1b6:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
+	RxData[indx++] = receivedChar;  // Store the character in the buffer
+ 1ba:	e0 91 29 01 	lds	r30, 0x0129	; 0x800129 <indx>
+ 1be:	91 e0       	ldi	r25, 0x01	; 1
+ 1c0:	9e 0f       	add	r25, r30
+ 1c2:	90 93 29 01 	sts	0x0129, r25	; 0x800129 <indx>
+ 1c6:	f0 e0       	ldi	r31, 0x00	; 0
+ 1c8:	e6 5d       	subi	r30, 0xD6	; 214
+ 1ca:	fe 4f       	sbci	r31, 0xFE	; 254
+ 1cc:	80 83       	st	Z, r24
+
+	if (indx >= sizeof(RxData)) {  // Reset index if buffer is full
+ 1ce:	80 91 29 01 	lds	r24, 0x0129	; 0x800129 <indx>
+ 1d2:	8a 30       	cpi	r24, 0x0A	; 10
+ 1d4:	10 f0       	brcs	.+4      	; 0x1da <__vector_18+0x36>
+		indx = 0;
+ 1d6:	10 92 29 01 	sts	0x0129, r1	; 0x800129 <indx>
+	}
+	RxData[indx] = '\0';  // Null-terminate the string
+ 1da:	e0 91 29 01 	lds	r30, 0x0129	; 0x800129 <indx>
+ 1de:	f0 e0       	ldi	r31, 0x00	; 0
+ 1e0:	e6 5d       	subi	r30, 0xD6	; 214
+ 1e2:	fe 4f       	sbci	r31, 0xFE	; 254
+ 1e4:	10 82       	st	Z, r1
+}
+ 1e6:	ff 91       	pop	r31
+ 1e8:	ef 91       	pop	r30
+ 1ea:	9f 91       	pop	r25
+ 1ec:	8f 91       	pop	r24
+ 1ee:	0f 90       	pop	r0
+ 1f0:	0f be       	out	0x3f, r0	; 63
+ 1f2:	0f 90       	pop	r0
+ 1f4:	1f 90       	pop	r1
+ 1f6:	18 95       	reti
+
+000001f8 <main>:
+
+int main(void) {
+ 1f8:	cf 93       	push	r28
+ 1fa:	df 93       	push	r29
+ 1fc:	cd b7       	in	r28, 0x3d	; 61
+ 1fe:	de b7       	in	r29, 0x3e	; 62
+ 200:	2a 97       	sbiw	r28, 0x0a	; 10
+ 202:	0f b6       	in	r0, 0x3f	; 63
+ 204:	f8 94       	cli
+ 206:	de bf       	out	0x3e, r29	; 62
+ 208:	0f be       	out	0x3f, r0	; 63
+ 20a:	cd bf       	out	0x3d, r28	; 61
+	gripper_setup();  // Set up Gripper
+ 20c:	0e 94 53 00 	call	0xa6	; 0xa6 <gripper_setup>
+	uartInit();
+ 210:	0e 94 57 00 	call	0xae	; 0xae <uartInit>
+	sei();  // Enable global interrupts
+ 214:	78 94       	sei
+
+	while (1) {
+		while(1){
+			char temp[10];  // temporary non-volatile char array
+			strcpy(temp, (char*)RxData);  // copy data from volatile char array to non-volatile array
+ 216:	6a e2       	ldi	r22, 0x2A	; 42
+ 218:	71 e0       	ldi	r23, 0x01	; 1
+ 21a:	ce 01       	movw	r24, r28
+ 21c:	01 96       	adiw	r24, 0x01	; 1
+ 21e:	0e 94 46 01 	call	0x28c	; 0x28c <strcpy>
+			// check if the received string is not empty (receivedstring != null equivalent)
+			if (strlen(temp) > 0) {
+ 222:	89 81       	ldd	r24, Y+1	; 0x01
+ 224:	88 23       	and	r24, r24
+ 226:	b9 f3       	breq	.-18     	; 0x216 <main+0x1e>
+				break;
+			}
+		}
+		for ( int i = 0; i < 10 ; i++){
+ 228:	00 e0       	ldi	r16, 0x00	; 0
+ 22a:	10 e0       	ldi	r17, 0x00	; 0
+ 22c:	0f c0       	rjmp	.+30     	; 0x24c <main+0x54>
+			USART_Transmit_String("ACK");
+ 22e:	84 e2       	ldi	r24, 0x24	; 36
+ 230:	91 e0       	ldi	r25, 0x01	; 1
+ 232:	0e 94 81 00 	call	0x102	; 0x102 <USART_Transmit_String>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 236:	2f ef       	ldi	r18, 0xFF	; 255
+ 238:	80 e7       	ldi	r24, 0x70	; 112
+ 23a:	92 e0       	ldi	r25, 0x02	; 2
+ 23c:	21 50       	subi	r18, 0x01	; 1
+ 23e:	80 40       	sbci	r24, 0x00	; 0
+ 240:	90 40       	sbci	r25, 0x00	; 0
+ 242:	e1 f7       	brne	.-8      	; 0x23c <main+0x44>
+ 244:	00 c0       	rjmp	.+0      	; 0x246 <main+0x4e>
+ 246:	00 00       	nop
+			// check if the received string is not empty (receivedstring != null equivalent)
+			if (strlen(temp) > 0) {
+				break;
+			}
+		}
+		for ( int i = 0; i < 10 ; i++){
+ 248:	0f 5f       	subi	r16, 0xFF	; 255
+ 24a:	1f 4f       	sbci	r17, 0xFF	; 255
+ 24c:	0a 30       	cpi	r16, 0x0A	; 10
+ 24e:	11 05       	cpc	r17, r1
+ 250:	74 f3       	brlt	.-36     	; 0x22e <main+0x36>
+
+			// Delay for 1000 ms
+			_delay_ms(100);
+		}
+		
+		btn_state();
+ 252:	0e 94 69 00 	call	0xd2	; 0xd2 <btn_state>
+		if (buttonPressed == 1)
+ 256:	80 91 28 01 	lds	r24, 0x0128	; 0x800128 <__data_end>
+ 25a:	81 30       	cpi	r24, 0x01	; 1
+ 25c:	81 f4       	brne	.+32     	; 0x27e <main+0x86>
+		{
+			gripper_opening();
+ 25e:	0e 94 8e 00 	call	0x11c	; 0x11c <gripper_opening>
+ 262:	8f ec       	ldi	r24, 0xCF	; 207
+ 264:	97 e0       	ldi	r25, 0x07	; 7
+ 266:	01 97       	sbiw	r24, 0x01	; 1
+ 268:	f1 f7       	brne	.-4      	; 0x266 <main+0x6e>
+ 26a:	00 c0       	rjmp	.+0      	; 0x26c <main+0x74>
+ 26c:	00 00       	nop
+			_delay_ms(1);
+			btn_state();
+ 26e:	0e 94 69 00 	call	0xd2	; 0xd2 <btn_state>
+			if (buttonPressed == 2)
+ 272:	80 91 28 01 	lds	r24, 0x0128	; 0x800128 <__data_end>
+ 276:	82 30       	cpi	r24, 0x02	; 2
+ 278:	11 f4       	brne	.+4      	; 0x27e <main+0x86>
+			{
+				gripper_closing();
+ 27a:	0e 94 b0 00 	call	0x160	; 0x160 <gripper_closing>
+			}
+		}
+
+		if (buttonPressed == 2) {
+ 27e:	80 91 28 01 	lds	r24, 0x0128	; 0x800128 <__data_end>
+ 282:	82 30       	cpi	r24, 0x02	; 2
+ 284:	41 f6       	brne	.-112    	; 0x216 <main+0x1e>
+			buttonPressed = 0; // Reset buttonPressed after showing "ON"
+ 286:	10 92 28 01 	sts	0x0128, r1	; 0x800128 <__data_end>
+ 28a:	c5 cf       	rjmp	.-118    	; 0x216 <main+0x1e>
+
+0000028c <strcpy>:
+ 28c:	fb 01       	movw	r30, r22
+ 28e:	dc 01       	movw	r26, r24
+ 290:	01 90       	ld	r0, Z+
+ 292:	0d 92       	st	X+, r0
+ 294:	00 20       	and	r0, r0
+ 296:	e1 f7       	brne	.-8      	; 0x290 <strcpy+0x4>
+ 298:	08 95       	ret
+
+0000029a <_exit>:
+ 29a:	f8 94       	cli
+
+0000029c <__stop_program>:
+ 29c:	ff cf       	rjmp	.-2      	; 0x29c <__stop_program>
